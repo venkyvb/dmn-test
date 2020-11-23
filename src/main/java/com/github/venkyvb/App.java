@@ -19,7 +19,7 @@ public final class App {
         // 
         List<DecisionTableInput> decisionTableInputs = new LinkedList<>();
         decisionTableInputs.add(new DecisionTableInput("urn_type", "urn_type", "string", "Type"));
-        decisionTableInputs.add(new DecisionTableInput("urn_family", "urn_family", "string", "PFamily"));
+        decisionTableInputs.add(new DecisionTableInput("urn_family", "urn_family", "string", "Family"));
         decisionTableInputs.add(new DecisionTableInput("urn_term", "urn_term", "integer", "Term")); 
         
         List<DecisionTableOutput> decisionTableOutputs = new LinkedList<>();
