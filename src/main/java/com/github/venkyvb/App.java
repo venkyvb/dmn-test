@@ -30,7 +30,7 @@ public final class App {
 
         List<String> inputValuesLnprf = new LinkedList<>();
         inputValuesLnprf.add("\"LNPRF\"");
-        inputValuesLnprf.add("");
+        inputValuesLnprf.add("\"LITS\",\"LILS\"");
         inputValuesLnprf.add("");
         rules.add(new RuleEntry(inputValuesLnprf, "50"));
 
@@ -50,7 +50,13 @@ public final class App {
         inputValuesLiss3.add("");
         inputValuesLiss3.add("\"LISS\"");
         inputValuesLiss3.add("<=23");
-        rules.add(new RuleEntry(inputValuesLiss3, "3"));     
+        rules.add(new RuleEntry(inputValuesLiss3, "3"));    
+
+        List<String> inputValuesLiss4 = new LinkedList<>();
+        inputValuesLiss4.add("");
+        inputValuesLiss4.add("\"LISS\"");
+        inputValuesLiss4.add("<=18");
+        rules.add(new RuleEntry(inputValuesLiss4, "2"));
 
         DecisionTableMetadata metadata = new DecisionTableMetadata(ruleSetId, decisionTableInputs, decisionTableOutputs, HitPolicy.UNIQUE);
              
@@ -65,7 +71,7 @@ public final class App {
         String ruleSetId = "testRuleSet1";
         String dmnModel = setUpRuleSet1(ruleSetId);
 
-        System.out.println(dmnModel);
+//        System.out.println(dmnModel);
 
         System.out
                 .println(
@@ -75,6 +81,18 @@ public final class App {
                                         Variables.createVariables().putValue("urn_type", "LNPRF")
                                                 .putValue("urn_family", "LITS").putValue("urn_term", 12))
                                 .toString());
+
+        System.out.println(DmnModelHandler
+                        .evaluateRules(ruleSetId, dmnModel,
+                                        Variables.createVariables().putValue("urn_type", "LNPRF")
+                                                        .putValue("urn_family", "LILS").putValue("urn_term", 12))
+                        .toString());      
+                        
+        System.out.println(DmnModelHandler
+                        .evaluateRules(ruleSetId, dmnModel,
+                                        Variables.createVariables().putValue("urn_type", "LNPRF")
+                                                        .putValue("urn_family", "LISS").putValue("urn_term", 12))
+                        .toString());                        
 
         System.out
                 .println(
