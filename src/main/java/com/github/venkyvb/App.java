@@ -52,12 +52,6 @@ public final class App {
         inputValuesLiss3.add("<=23");
         rules.add(new RuleEntry(inputValuesLiss3, "3"));    
 
-        List<String> inputValuesLiss4 = new LinkedList<>();
-        inputValuesLiss4.add("");
-        inputValuesLiss4.add("\"LISS\"");
-        inputValuesLiss4.add("<=18");
-        rules.add(new RuleEntry(inputValuesLiss4, "2"));
-
         DecisionTableMetadata metadata = new DecisionTableMetadata(ruleSetId, decisionTableInputs, decisionTableOutputs, HitPolicy.UNIQUE);
              
         String dmnModel = DmnModelHandler.transform(metadata, rules);
