@@ -1,6 +1,7 @@
 package com.github.venkyvb;
 
 import java.text.ParseException;
+import java.time.LocalDateTime;
 import java.util.*;
 import org.camunda.bpm.engine.variable.Variables;
 import org.camunda.bpm.model.dmn.HitPolicy;
@@ -28,13 +29,15 @@ public final class App {
     List<String> inputValues1 = new LinkedList<>();
     inputValues1.add("\"LNPRF\"");
     inputValues1.add(
-        "[date and time(\"2020-10-01T00:00:00\")..date and time(\"2020-12-31T00:00:00\")]");
+        DmnModelHandler.getValidityDateInputEntry(
+            LocalDateTime.of(2020, 10, 1, 00, 00, 00), LocalDateTime.of(2020, 12, 31, 00, 00, 00)));
     rules.add(new RuleEntry(inputValues1, "50"));
 
     List<String> inputValues2 = new LinkedList<>();
     inputValues2.add("\"LNPRF\"");
     inputValues2.add(
-        "[date and time(\"2020-01-01T00:00:00\")..date and time(\"2020-09-30T00:00:00\")]");
+        DmnModelHandler.getValidityDateInputEntry(
+            LocalDateTime.of(2020, 1, 1, 00, 00, 00), LocalDateTime.of(2020, 9, 30, 00, 00, 00)));
     rules.add(new RuleEntry(inputValues2, "25"));
 
     DecisionTableMetadata metadata =

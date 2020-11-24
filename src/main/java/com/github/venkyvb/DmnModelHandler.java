@@ -1,6 +1,8 @@
 package com.github.venkyvb;
 
 import java.io.ByteArrayInputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import org.camunda.bpm.dmn.engine.DmnDecision;
 import org.camunda.bpm.dmn.engine.DmnDecisionTableResult;
@@ -21,6 +23,8 @@ import org.camunda.bpm.model.dmn.instance.Rule;
 import org.camunda.bpm.model.dmn.instance.Text;
 
 public class DmnModelHandler {
+
+  private static DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
 
   public static String transform(DecisionTableMetadata metadata, List<RuleEntry> rules) {
     DmnModelInstance modelInstance = getDmnModelInstance(metadata.getRuleSetId());
@@ -127,5 +131,14 @@ public class DmnModelHandler {
     rule.addChildElement(outputEntry);
 
     return rule;
+  }
+
+  public static String getValidityDateInputEntry(LocalDateTime from, LocalDateTime to) {
+
+    String fromDate = from.format(formatter);
+    String toDate = to.format(formatter);
+
+    // From date inclusive, to date exclusive
+    return "[date and time(\"" + fromDate + "\")..date and time(\"" + toDate + "\"))";
   }
 }
