@@ -17,7 +17,7 @@ public class FeelExpressionTest {
         DmnModelHandler.evaluateRules(
                 ruleSetId,
                 dmnModel,
-                Variables.createVariables().putValue("urn_type", Arrays.asList("RCorp", "LiL")))
+                Variables.createVariables().putValue("urn_type", Arrays.asList("RC", "LL")))
             .getResultList();
 
     for (Map<String, Object> entry : result) {
