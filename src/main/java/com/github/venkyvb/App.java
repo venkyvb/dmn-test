@@ -10,7 +10,9 @@ public final class App {
   private App() {}
 
   public static void main(String[] args) throws ParseException {
-    testRuleSet1();
+    // testRuleSet1();
+    // BundleTest.executeTest();
+    FeelExpressionTest.executeTest();
   }
 
   private static String setUpRuleSet1(String ruleSetId) {
@@ -75,7 +77,11 @@ public final class App {
 
     DecisionTableMetadata metadata =
         new DecisionTableMetadata(
-            ruleSetId, decisionTableInputs, decisionTableOutputs, HitPolicy.UNIQUE);
+            ruleSetId,
+            decisionTableInputs,
+            decisionTableOutputs,
+            HitPolicy.UNIQUE,
+            Optional.empty());
 
     String dmnModel = DmnModelHandler.transform(metadata, rules);
 

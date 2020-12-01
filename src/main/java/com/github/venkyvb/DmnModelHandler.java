@@ -8,6 +8,7 @@ import org.camunda.bpm.dmn.engine.DmnDecision;
 import org.camunda.bpm.dmn.engine.DmnDecisionTableResult;
 import org.camunda.bpm.dmn.engine.DmnEngine;
 import org.camunda.bpm.dmn.engine.DmnEngineConfiguration;
+import org.camunda.bpm.dmn.engine.delegate.DmnDecisionTableEvaluationListener;
 import org.camunda.bpm.engine.variable.VariableMap;
 import org.camunda.bpm.model.dmn.Dmn;
 import org.camunda.bpm.model.dmn.DmnModelInstance;
@@ -54,8 +55,14 @@ public class DmnModelHandler {
     DmnModelInstance modelInstance =
         Dmn.readModelFromStream(new ByteArrayInputStream(dmnModel.getBytes()));
 
-    DmnEngine dmnEngine =
-        DmnEngineConfiguration.createDefaultDmnEngineConfiguration().buildEngine();
+    DmnEngineConfiguration configuration =
+        DmnEngineConfiguration.createDefaultDmnEngineConfiguration();
+
+    DmnDecisionTableEvaluationListener listener = new DecisionTableEvaluationListener();
+
+    configuration.getCustomPostDecisionTableEvaluationListeners().add(listener);
+
+    DmnEngine dmnEngine = configuration.buildEngine();
 
     DmnDecision decision = dmnEngine.parseDecision(getDecisionId(ruleSetId), modelInstance);
 
@@ -88,6 +95,9 @@ public class DmnModelHandler {
 
     DecisionTable decisionTable = modelInstance.newInstance(DecisionTable.class);
     decisionTable.setHitPolicy(metadata.getHitPolicy());
+    if (metadata.getAggregator().isPresent()) {
+      decisionTable.setAggregation(metadata.getAggregator().get());
+    }
 
     for (DecisionTableInput entry : metadata.getInputs()) {
       Input input = modelInstance.newInstance(Input.class);
