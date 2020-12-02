@@ -19,11 +19,11 @@ public final class App {
 
     //
     List<DecisionTableInput> decisionTableInputs = new LinkedList<>();
-    decisionTableInputs.add(new DecisionTableInput("urn_type", "urn_type", "string", "Type"));
-    decisionTableInputs.add(new DecisionTableInput("urn_family", "urn_family", "string", "Family"));
-    decisionTableInputs.add(new DecisionTableInput("urn_term", "urn_term", "integer", "Term"));
+    decisionTableInputs.add(new DecisionTableInput("dim_type", "dim_type", "string", "Type"));
+    decisionTableInputs.add(new DecisionTableInput("dim_family", "dim_family", "string", "Family"));
+    decisionTableInputs.add(new DecisionTableInput("dim_term", "dim_term", "integer", "Term"));
     decisionTableInputs.add(
-        new DecisionTableInput("urn_validity", "urn_validity", "date", "Validity"));
+        new DecisionTableInput("dim_validity", "dim_validity", "date", "Validity"));
 
     List<DecisionTableOutput> decisionTableOutputs = new LinkedList<>();
     decisionTableOutputs.add(new DecisionTableOutput("Discount", "discount", "double"));
@@ -100,10 +100,10 @@ public final class App {
                 ruleSetId,
                 dmnModel,
                 Variables.createVariables()
-                    .putValue("urn_type", "LNPRF")
-                    .putValue("urn_family", "LITS")
-                    .putValue("urn_term", 12)
-                    .putValue("urn_validity", "2020-10-01T00:00:00"))
+                    .putValue("dim_type", "LNPRF")
+                    .putValue("dim_family", "LITS")
+                    .putValue("dim_term", 12)
+                    .putValue("dim_validity", "2020-10-01T00:00:00"))
             .toString());
 
     System.out.println(
@@ -111,10 +111,10 @@ public final class App {
                 ruleSetId,
                 dmnModel,
                 Variables.createVariables()
-                    .putValue("urn_type", "LNPRF")
-                    .putValue("urn_family", "LILS")
-                    .putValue("urn_term", 12)
-                    .putValue("urn_validity", "2020-09-30T00:00:00"))
+                    .putValue("dim_type", "LNPRF")
+                    .putValue("dim_family", "LILS")
+                    .putValue("dim_term", 12)
+                    .putValue("dim_validity", "2020-09-30T00:00:00"))
             .toString());
 
     System.out.println(
@@ -122,10 +122,10 @@ public final class App {
                 ruleSetId,
                 dmnModel,
                 Variables.createVariables()
-                    .putValue("urn_type", "LNPRF")
-                    .putValue("urn_family", "LISS")
-                    .putValue("urn_term", 12)
-                    .putValue("urn_validity", "2020-10-01T00:00:00"))
+                    .putValue("dim_type", "LNPRF")
+                    .putValue("dim_family", "LISS")
+                    .putValue("dim_term", 12)
+                    .putValue("dim_validity", "2020-10-01T00:00:00"))
             .toString());
 
     System.out.println(
@@ -133,10 +133,10 @@ public final class App {
                 ruleSetId,
                 dmnModel,
                 Variables.createVariables()
-                    .putValue("urn_type", "LISS")
-                    .putValue("urn_family", "LISS")
-                    .putValue("urn_term", 12)
-                    .putValue("urn_validity", "2020-10-01T00:00:00"))
+                    .putValue("dim_type", "LISS")
+                    .putValue("dim_family", "LISS")
+                    .putValue("dim_term", 12)
+                    .putValue("dim_validity", "2020-10-01T00:00:00"))
             .toString());
 
     System.out.println(
@@ -144,10 +144,10 @@ public final class App {
                 ruleSetId,
                 dmnModel,
                 Variables.createVariables()
-                    .putValue("urn_type", "LISS")
-                    .putValue("urn_family", "ABC")
-                    .putValue("urn_term", 12)
-                    .putValue("urn_validity", "2020-10-01T00:00:00"))
+                    .putValue("dim_type", "LISS")
+                    .putValue("dim_family", "ABC")
+                    .putValue("dim_term", 12)
+                    .putValue("dim_validity", "2020-10-01T00:00:00"))
             .toString());
 
     System.out.println(
@@ -155,10 +155,10 @@ public final class App {
                 ruleSetId,
                 dmnModel,
                 Variables.createVariables()
-                    .putValue("urn_type", "LISS")
-                    .putValue("urn_family", "LISS")
-                    .putValue("urn_term", 26)
-                    .putValue("urn_validity", "2020-10-01T00:00:00"))
+                    .putValue("dim_type", "LISS")
+                    .putValue("dim_family", "LISS")
+                    .putValue("dim_term", 26)
+                    .putValue("dim_validity", "2020-10-01T00:00:00"))
             .toString());
 
     System.out.println(
@@ -166,10 +166,10 @@ public final class App {
                 ruleSetId,
                 dmnModel,
                 Variables.createVariables()
-                    .putValue("urn_type", "LISS")
-                    .putValue("urn_family", "LISS")
-                    .putValue("urn_term", 36)
-                    .putValue("urn_validity", "2020-10-01T00:00:00"))
+                    .putValue("dim_type", "LISS")
+                    .putValue("dim_family", "LISS")
+                    .putValue("dim_term", 36)
+                    .putValue("dim_validity", "2020-10-01T00:00:00"))
             .toString());
 
     System.out.println(
@@ -177,10 +177,10 @@ public final class App {
                 ruleSetId,
                 dmnModel,
                 Variables.createVariables()
-                    .putValue("urn_type", "ABC")
-                    .putValue("urn_family", "LISS")
-                    .putValue("urn_term", 36)
-                    .putValue("urn_validity", "2020-10-01T00:00:00"))
+                    .putValue("dim_type", "ABC")
+                    .putValue("dim_family", "LISS")
+                    .putValue("dim_term", 36)
+                    .putValue("dim_validity", "2020-10-01T00:00:00"))
             .toString());
   }
 }

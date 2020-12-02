@@ -17,7 +17,7 @@ public class BundleTest {
         DmnModelHandler.evaluateRules(
                 ruleSetId,
                 dmnModel,
-                Variables.createVariables().putValue("urn_type", Arrays.asList("RC", "LL")))
+                Variables.createVariables().putValue("dim_type", Arrays.asList("RC", "LL")))
             .getResultList();
 
     for (Map<String, Object> entry : result) {
@@ -27,10 +27,10 @@ public class BundleTest {
 
   public static String setupRuleSetOption1(String ruleSetId) {
     List<DecisionTableInput> decisionTableInputs = new LinkedList<>();
-    decisionTableInputs.add(new DecisionTableInput("urn_type", "urn_type", "string", "Type"));
+    decisionTableInputs.add(new DecisionTableInput("dim_type", "dim_type", "string", "Type"));
 
     List<DecisionTableOutput> decisionTableOutputs = new LinkedList<>();
-    decisionTableOutputs.add(new DecisionTableOutput("urn_result", "urn_result", "string"));
+    decisionTableOutputs.add(new DecisionTableOutput("dim_result", "dim_result", "string"));
 
     List<RuleEntry> rules = new LinkedList<>();
     List<String> inputValuesB1 = new LinkedList<>();
@@ -71,15 +71,15 @@ public class BundleTest {
                 ruleSetId,
                 dmnModel,
                 Variables.createVariables()
-                    .putValue("urn_rr", "AP")
-                    .putValue("urn_ts1", "RC")
-                    .putValue("urn_ts1_vol", 1)
-                    .putValue("urn_ts2", "JS")
-                    .putValue("urn_ts2_vol", 7)
-                    .putValue("urn_ls1", "LL")
-                    .putValue("urn_ls1_vol", 10)
-                    .putValue("urn_level", "TA0")
-                    .putValue("urn_otype", "NB"))
+                    .putValue("dim_rr", "AP")
+                    .putValue("dim_ts1", "RC")
+                    .putValue("dim_ts1_vol", 1)
+                    .putValue("dim_ts2", "JS")
+                    .putValue("dim_ts2_vol", 7)
+                    .putValue("dim_ls1", "LL")
+                    .putValue("dim_ls1_vol", 10)
+                    .putValue("dim_level", "TA0")
+                    .putValue("dim_otype", "NB"))
             .getResultList();
 
     printResult("PositiveTest", result);
@@ -89,15 +89,15 @@ public class BundleTest {
                 ruleSetId,
                 dmnModel,
                 Variables.createVariables()
-                    .putValue("urn_rr", "AP")
-                    .putValue("urn_ts1", "RC")
-                    .putValue("urn_ts1_vol", 1)
-                    .putValue("urn_ts2", "JS")
-                    .putValue("urn_ts2_vol", 2)
-                    .putValue("urn_ls1", "LL")
-                    .putValue("urn_ls1_vol", 10)
-                    .putValue("urn_level", "TA0")
-                    .putValue("urn_otype", "NB"))
+                    .putValue("dim_rr", "AP")
+                    .putValue("dim_ts1", "RC")
+                    .putValue("dim_ts1_vol", 1)
+                    .putValue("dim_ts2", "JS")
+                    .putValue("dim_ts2_vol", 2)
+                    .putValue("dim_ls1", "LL")
+                    .putValue("dim_ls1_vol", 10)
+                    .putValue("dim_level", "TA0")
+                    .putValue("dim_otype", "NB"))
             .getResultList();
 
     printResult("NegativeTest", result);
@@ -107,15 +107,15 @@ public class BundleTest {
                 ruleSetId,
                 dmnModel,
                 Variables.createVariables()
-                    .putValue("urn_rr", "AP")
-                    .putValue("urn_ts1", "RC")
-                    .putValue("urn_ts1_vol", 2)
-                    .putValue("urn_ts2", "JS")
-                    .putValue("urn_ts2_vol", 2)
-                    .putValue("urn_ls1", "LL")
-                    .putValue("urn_ls1_vol", 10)
-                    .putValue("urn_level", "TA0")
-                    .putValue("urn_otype", "NB"))
+                    .putValue("dim_rr", "AP")
+                    .putValue("dim_ts1", "RC")
+                    .putValue("dim_ts1_vol", 2)
+                    .putValue("dim_ts2", "JS")
+                    .putValue("dim_ts2_vol", 2)
+                    .putValue("dim_ls1", "LL")
+                    .putValue("dim_ls1_vol", 10)
+                    .putValue("dim_level", "TA0")
+                    .putValue("dim_otype", "NB"))
             .getResultList();
 
     printResult("PositiveTest", result);
@@ -125,15 +125,15 @@ public class BundleTest {
                 ruleSetId,
                 dmnModel,
                 Variables.createVariables()
-                    .putValue("urn_rr", "AP")
-                    .putValue("urn_ts1", "RC")
-                    .putValue("urn_ts1_vol", 2)
-                    .putValue("urn_ts2", "JS")
-                    .putValue("urn_ts2_vol", 2)
-                    .putValue("urn_ls1", "LLP")
-                    .putValue("urn_ls1_vol", 10)
-                    .putValue("urn_level", "TA0")
-                    .putValue("urn_otype", "NB"))
+                    .putValue("dim_rr", "AP")
+                    .putValue("dim_ts1", "RC")
+                    .putValue("dim_ts1_vol", 2)
+                    .putValue("dim_ts2", "JS")
+                    .putValue("dim_ts2_vol", 2)
+                    .putValue("dim_ls1", "LLP")
+                    .putValue("dim_ls1_vol", 10)
+                    .putValue("dim_level", "TA0")
+                    .putValue("dim_otype", "NB"))
             .getResultList();
 
     printResult("PositiveTest", result);
@@ -148,21 +148,21 @@ public class BundleTest {
 
   public static String setupRuleSetOption2(String ruleSetId) {
     List<DecisionTableInput> decisionTableInputs = new LinkedList<>();
-    decisionTableInputs.add(new DecisionTableInput("urn_rr", "urn_rr", "string", "RR"));
-    decisionTableInputs.add(new DecisionTableInput("urn_ts1", "urn_ts1", "string", "TS1"));
+    decisionTableInputs.add(new DecisionTableInput("dim_rr", "dim_rr", "string", "RR"));
+    decisionTableInputs.add(new DecisionTableInput("dim_ts1", "dim_ts1", "string", "TS1"));
     decisionTableInputs.add(
-        new DecisionTableInput("urn_ts1_vol", "urn_ts1_vol", "integer", "TS1 Vol"));
-    decisionTableInputs.add(new DecisionTableInput("urn_ts2", "urn_ts2", "string", "TS2"));
+        new DecisionTableInput("dim_ts1_vol", "dim_ts1_vol", "integer", "TS1 Vol"));
+    decisionTableInputs.add(new DecisionTableInput("dim_ts2", "dim_ts2", "string", "TS2"));
     decisionTableInputs.add(
-        new DecisionTableInput("urn_ts2_vol", "urn_ts2_vol", "integer", "TS2 Vol"));
-    decisionTableInputs.add(new DecisionTableInput("urn_ls1", "urn_ls1", "string", "LS1"));
-    decisionTableInputs.add(new DecisionTableInput("urn_level", "urn_level", "string", "Level"));
+        new DecisionTableInput("dim_ts2_vol", "dim_ts2_vol", "integer", "TS2 Vol"));
+    decisionTableInputs.add(new DecisionTableInput("dim_ls1", "dim_ls1", "string", "LS1"));
+    decisionTableInputs.add(new DecisionTableInput("dim_level", "dim_level", "string", "Level"));
     decisionTableInputs.add(
-        new DecisionTableInput("urn_ls1_vol", "urn_ls1_vol", "integer", "LS1 Vol"));
-    decisionTableInputs.add(new DecisionTableInput("urn_otype", "urn_otype", "string", "Otype"));
+        new DecisionTableInput("dim_ls1_vol", "dim_ls1_vol", "integer", "LS1 Vol"));
+    decisionTableInputs.add(new DecisionTableInput("dim_otype", "dim_otype", "string", "Otype"));
 
     List<DecisionTableOutput> decisionTableOutputs = new LinkedList<>();
-    decisionTableOutputs.add(new DecisionTableOutput("urn_bundle", "urn_bundle", "string"));
+    decisionTableOutputs.add(new DecisionTableOutput("dim_bundle", "dim_bundle", "string"));
 
     List<RuleEntry> rules = new LinkedList<>();
     List<String> inputValues1 = new LinkedList<>();

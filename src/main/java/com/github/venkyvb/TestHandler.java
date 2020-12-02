@@ -46,7 +46,7 @@ public class TestHandler {
     InputExpression inputExpressionDtype = modelInstance.newInstance(InputExpression.class);
     inputExpressionDtype.setTypeRef("string");
     Text textDtype = modelInstance.newInstance(Text.class);
-    textDtype.setTextContent("urn_type");
+    textDtype.setTextContent("dim_type");
     inputExpressionDtype.setText(textDtype);
     dtypeInput.addChildElement(inputExpressionDtype);
     decisionTable.addChildElement(dtypeInput);
@@ -56,7 +56,7 @@ public class TestHandler {
     InputExpression inputExpressionFamily = modelInstance.newInstance(InputExpression.class);
     inputExpressionFamily.setTypeRef("string");
     Text textFamily = modelInstance.newInstance(Text.class);
-    textFamily.setTextContent("urn_family");
+    textFamily.setTextContent("dim_family");
     inputExpressionFamily.setText(textFamily);
     familyInput.addChildElement(inputExpressionFamily);
     decisionTable.addChildElement(familyInput);
@@ -66,7 +66,7 @@ public class TestHandler {
     InputExpression inputExpressionDterm = modelInstance.newInstance(InputExpression.class);
     inputExpressionDterm.setTypeRef("integer");
     Text textDterm = modelInstance.newInstance(Text.class);
-    textDterm.setTextContent("urn_term");
+    textDterm.setTextContent("dim_term");
     inputExpressionDterm.setText(textDterm);
     dTermInput.addChildElement(inputExpressionDterm);
     decisionTable.addChildElement(dTermInput);
@@ -200,45 +200,45 @@ public class TestHandler {
 
     VariableMap variables1 =
         Variables.createVariables()
-            .putValue("urn_type", "LNPRF")
-            .putValue("urn_family", "LITS")
-            .putValue("urn_term", 12);
+            .putValue("dim_type", "LNPRF")
+            .putValue("dim_family", "LITS")
+            .putValue("dim_term", 12);
     DmnDecisionTableResult result = dmnEngine.evaluateDecisionTable(decision2, variables1);
 
     System.out.println(result.toString());
 
     VariableMap variables2 =
         Variables.createVariables()
-            .putValue("urn_type", "LISS")
-            .putValue("urn_family", "LISS")
-            .putValue("urn_term", 12);
+            .putValue("dim_type", "LISS")
+            .putValue("dim_family", "LISS")
+            .putValue("dim_term", 12);
     DmnDecisionTableResult result2 = dmnEngine.evaluateDecisionTable(decision2, variables2);
 
     System.out.println(result2.toString());
 
     VariableMap variables3 =
         Variables.createVariables()
-            .putValue("urn_type", "LISS")
-            .putValue("urn_family", "ABC")
-            .putValue("urn_term", 12);
+            .putValue("dim_type", "LISS")
+            .putValue("dim_family", "ABC")
+            .putValue("dim_term", 12);
     DmnDecisionTableResult result3 = dmnEngine.evaluateDecisionTable(decision2, variables3);
 
     System.out.println(result3.toString());
 
     VariableMap variables4 =
         Variables.createVariables()
-            .putValue("urn_type", "LISS")
-            .putValue("urn_family", "LISS")
-            .putValue("urn_term", 26);
+            .putValue("dim_type", "LISS")
+            .putValue("dim_family", "LISS")
+            .putValue("dim_term", 26);
     DmnDecisionTableResult result4 = dmnEngine.evaluateDecisionTable(decision2, variables4);
 
     System.out.println(result4.toString());
 
     VariableMap variables5 =
         Variables.createVariables()
-            .putValue("urn_type", "LISS")
-            .putValue("urn_family", "LISS")
-            .putValue("urn_term", 36);
+            .putValue("dim_type", "LISS")
+            .putValue("dim_family", "LISS")
+            .putValue("dim_term", 36);
     DmnDecisionTableResult result5 = dmnEngine.evaluateDecisionTable(decision2, variables5);
 
     System.out.println(result5.toString());
