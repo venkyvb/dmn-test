@@ -12,7 +12,7 @@ public final class App {
   public static void main(String[] args) throws ParseException {
     // testRuleSet1();
     // BundleTest.executeTest();
-    FeelExpressionTest.executeTest();
+    BundleTest.executeTestOption2();
   }
 
   private static String setUpRuleSet1(String ruleSetId) {

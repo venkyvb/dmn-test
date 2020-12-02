@@ -1,6 +1,5 @@
 package com.github.venkyvb;
 
-import java.time.LocalDateTime;
 import java.util.*;
 import org.camunda.bpm.engine.variable.Variables;
 import org.camunda.bpm.model.dmn.BuiltinAggregator;
@@ -8,83 +7,45 @@ import org.camunda.bpm.model.dmn.HitPolicy;
 
 public class BundleTest {
 
-  public static void executeTest() {
+  public static void executeTestOption1() {
     String ruleSetId = "testRuleSet3";
-    String dmnModel = setupRuleSet(ruleSetId);
+    String dmnModel = setupRuleSetOption1(ruleSetId);
 
     System.out.println(dmnModel);
 
-    System.out.println(
+    List<Map<String, Object>> result =
         DmnModelHandler.evaluateRules(
                 ruleSetId,
                 dmnModel,
-                Variables.createVariables()
-                    .putValue("urn_prod", "\"RC\", \"JS\"")
-                    .putValue("urn_vol", 3)
-                    .putValue("urn_vol", 10)
-                    .putValue("urn_level", "")
-                    .putValue("urn_validity", "2020-10-01T00:00:00"))
-            .toString());
+                Variables.createVariables().putValue("urn_type", Arrays.asList("RC", "LL")))
+            .getResultList();
+
+    for (Map<String, Object> entry : result) {
+      System.out.println(entry);
+    }
   }
 
-  public static String setupRuleSet(String ruleSetId) {
-
+  public static String setupRuleSetOption1(String ruleSetId) {
     List<DecisionTableInput> decisionTableInputs = new LinkedList<>();
-    decisionTableInputs.add(new DecisionTableInput("urn_prod", "urn_prod", "string", "Prod"));
-    decisionTableInputs.add(new DecisionTableInput("urn_vol", "urn_vol", "integer", "Vol"));
-    decisionTableInputs.add(new DecisionTableInput("urn_level", "urn_level", "string", "Level"));
-    decisionTableInputs.add(
-        new DecisionTableInput("urn_validity", "urn_validity", "date", "Validity"));
+    decisionTableInputs.add(new DecisionTableInput("urn_type", "urn_type", "string", "Type"));
 
     List<DecisionTableOutput> decisionTableOutputs = new LinkedList<>();
-    decisionTableOutputs.add(new DecisionTableOutput("Weight", "urn_weight", "integer"));
+    decisionTableOutputs.add(new DecisionTableOutput("urn_result", "urn_result", "string"));
 
     List<RuleEntry> rules = new LinkedList<>();
-
     List<String> inputValuesB1 = new LinkedList<>();
-    inputValuesB1.add("\"RC\"");
-    inputValuesB1.add(">1");
-    inputValuesB1.add("");
-    inputValuesB1.add(
-        DmnModelHandler.getValidityDateInputEntry(
-            LocalDateTime.of(2020, 10, 1, 00, 00, 00), LocalDateTime.of(2021, 6, 30, 00, 00, 00)));
-    rules.add(new RuleEntry(inputValuesB1, "1"));
+    inputValuesB1.add("contains(cellInput, \"RC\")");
+    rules.add(new RuleEntry(inputValuesB1, "\"RC\""));
 
     List<String> inputValuesB2 = new LinkedList<>();
-    inputValuesB2.add("\"JS\"");
-    inputValuesB2.add(">6");
-    inputValuesB2.add("");
-    inputValuesB2.add(
-        DmnModelHandler.getValidityDateInputEntry(
-            LocalDateTime.of(2020, 10, 1, 00, 00, 00), LocalDateTime.of(2021, 6, 30, 00, 00, 00)));
-    rules.add(new RuleEntry(inputValuesB2, "1"));
+    inputValuesB2.add("contains(cellInput, \"JS\")");
+    rules.add(new RuleEntry(inputValuesB2, "\"JS\""));
 
     List<String> inputValuesB3 = new LinkedList<>();
-    inputValuesB3.add("\"LL\",\"LLP\"");
-    inputValuesB3.add(">10");
-    inputValuesB3.add("L0");
     inputValuesB3.add(
-        DmnModelHandler.getValidityDateInputEntry(
-            LocalDateTime.of(2020, 10, 1, 00, 00, 00), LocalDateTime.of(2021, 6, 30, 00, 00, 00)));
-    rules.add(new RuleEntry(inputValuesB3, "2"));
-
-    List<String> inputValuesB4 = new LinkedList<>();
-    inputValuesB4.add("\"LL\",\"LLP\"");
-    inputValuesB4.add(">50");
-    inputValuesB4.add("\"L1\",\"L2\"");
-    inputValuesB4.add(
-        DmnModelHandler.getValidityDateInputEntry(
-            LocalDateTime.of(2020, 10, 1, 00, 00, 00), LocalDateTime.of(2021, 6, 30, 00, 00, 00)));
-    rules.add(new RuleEntry(inputValuesB4, "2"));
-
-    List<String> inputValuesB5 = new LinkedList<>();
-    inputValuesB5.add("\"LL\",\"LLP\"");
-    inputValuesB5.add(">100");
-    inputValuesB5.add("\"L3\",\"L4\"");
-    inputValuesB5.add(
-        DmnModelHandler.getValidityDateInputEntry(
-            LocalDateTime.of(2020, 10, 1, 00, 00, 00), LocalDateTime.of(2021, 6, 30, 00, 00, 00)));
-    rules.add(new RuleEntry(inputValuesB5, "2"));
+        "(contains(cellInput, \"RC\") or contains(cellInput, \"JS\")) and"
+            + " (contains(cellInput, \"LL\") or contains(cellInput, \"LLP\"))");
+    rules.add(new RuleEntry(inputValuesB3, "\"RC OR JS AND LL OR LLP\""));
 
     DecisionTableMetadata metadata =
         new DecisionTableMetadata(
@@ -92,7 +53,149 @@ public class BundleTest {
             decisionTableInputs,
             decisionTableOutputs,
             HitPolicy.COLLECT,
-            Optional.of(BuiltinAggregator.SUM));
+            Optional.of(BuiltinAggregator.COUNT));
+
+    String dmnModel = DmnModelHandler.transform(metadata, rules);
+
+    return dmnModel;
+  }
+
+  public static void executeTestOption2() {
+    String ruleSetId = "testRuleSet3";
+    String dmnModel = setupRuleSetOption2(ruleSetId);
+
+    System.out.println(dmnModel);
+
+    List<Map<String, Object>> result =
+        DmnModelHandler.evaluateRules(
+                ruleSetId,
+                dmnModel,
+                Variables.createVariables()
+                    .putValue("urn_rr", "AP")
+                    .putValue("urn_ts1", "RC")
+                    .putValue("urn_ts1_vol", 1)
+                    .putValue("urn_ts2", "JS")
+                    .putValue("urn_ts2_vol", 7)
+                    .putValue("urn_ls1", "LL")
+                    .putValue("urn_ls1_vol", 10)
+                    .putValue("urn_level", "TA0")
+                    .putValue("urn_otype", "NB"))
+            .getResultList();
+
+    printResult("PositiveTest", result);
+
+    result =
+        DmnModelHandler.evaluateRules(
+                ruleSetId,
+                dmnModel,
+                Variables.createVariables()
+                    .putValue("urn_rr", "AP")
+                    .putValue("urn_ts1", "RC")
+                    .putValue("urn_ts1_vol", 1)
+                    .putValue("urn_ts2", "JS")
+                    .putValue("urn_ts2_vol", 2)
+                    .putValue("urn_ls1", "LL")
+                    .putValue("urn_ls1_vol", 10)
+                    .putValue("urn_level", "TA0")
+                    .putValue("urn_otype", "NB"))
+            .getResultList();
+
+    printResult("NegativeTest", result);
+
+    result =
+        DmnModelHandler.evaluateRules(
+                ruleSetId,
+                dmnModel,
+                Variables.createVariables()
+                    .putValue("urn_rr", "AP")
+                    .putValue("urn_ts1", "RC")
+                    .putValue("urn_ts1_vol", 2)
+                    .putValue("urn_ts2", "JS")
+                    .putValue("urn_ts2_vol", 2)
+                    .putValue("urn_ls1", "LL")
+                    .putValue("urn_ls1_vol", 10)
+                    .putValue("urn_level", "TA0")
+                    .putValue("urn_otype", "NB"))
+            .getResultList();
+
+    printResult("PositiveTest", result);
+
+    result =
+        DmnModelHandler.evaluateRules(
+                ruleSetId,
+                dmnModel,
+                Variables.createVariables()
+                    .putValue("urn_rr", "AP")
+                    .putValue("urn_ts1", "RC")
+                    .putValue("urn_ts1_vol", 2)
+                    .putValue("urn_ts2", "JS")
+                    .putValue("urn_ts2_vol", 2)
+                    .putValue("urn_ls1", "LLP")
+                    .putValue("urn_ls1_vol", 10)
+                    .putValue("urn_level", "TA0")
+                    .putValue("urn_otype", "NB"))
+            .getResultList();
+
+    printResult("PositiveTest", result);
+  }
+
+  private static void printResult(String testName, List<Map<String, Object>> result) {
+    System.out.println(testName);
+    for (Map<String, Object> entry : result) {
+      System.out.println(entry);
+    }
+  }
+
+  public static String setupRuleSetOption2(String ruleSetId) {
+    List<DecisionTableInput> decisionTableInputs = new LinkedList<>();
+    decisionTableInputs.add(new DecisionTableInput("urn_rr", "urn_rr", "string", "RR"));
+    decisionTableInputs.add(new DecisionTableInput("urn_ts1", "urn_ts1", "string", "TS1"));
+    decisionTableInputs.add(
+        new DecisionTableInput("urn_ts1_vol", "urn_ts1_vol", "integer", "TS1 Vol"));
+    decisionTableInputs.add(new DecisionTableInput("urn_ts2", "urn_ts2", "string", "TS2"));
+    decisionTableInputs.add(
+        new DecisionTableInput("urn_ts2_vol", "urn_ts2_vol", "integer", "TS2 Vol"));
+    decisionTableInputs.add(new DecisionTableInput("urn_ls1", "urn_ls1", "string", "LS1"));
+    decisionTableInputs.add(new DecisionTableInput("urn_level", "urn_level", "string", "Level"));
+    decisionTableInputs.add(
+        new DecisionTableInput("urn_ls1_vol", "urn_ls1_vol", "integer", "LS1 Vol"));
+    decisionTableInputs.add(new DecisionTableInput("urn_otype", "urn_otype", "string", "Otype"));
+
+    List<DecisionTableOutput> decisionTableOutputs = new LinkedList<>();
+    decisionTableOutputs.add(new DecisionTableOutput("urn_bundle", "urn_bundle", "string"));
+
+    List<RuleEntry> rules = new LinkedList<>();
+    List<String> inputValues1 = new LinkedList<>();
+    inputValues1.add("\"AP\"");
+    inputValues1.add("\"RC\"");
+    inputValues1.add(">1");
+    inputValues1.add("");
+    inputValues1.add("");
+    inputValues1.add("\"LL\",\"LLP\"");
+    inputValues1.add("\"TA0\"");
+    inputValues1.add(">=10");
+    inputValues1.add("\"PIL\",\"NB\"");
+    rules.add(new RuleEntry(inputValues1, "\"Bundle1\""));
+
+    List<String> inputValues2 = new LinkedList<>();
+    inputValues2.add("\"AP\"");
+    inputValues2.add("");
+    inputValues2.add("");
+    inputValues2.add("\"JS\"");
+    inputValues2.add(">6");
+    inputValues2.add("\"LL\",\"LLP\"");
+    inputValues2.add("\"TA0\"");
+    inputValues2.add(">=10");
+    inputValues2.add("\"PIL\",\"NB\"");
+    rules.add(new RuleEntry(inputValues2, "\"Bundle1\""));
+
+    DecisionTableMetadata metadata =
+        new DecisionTableMetadata(
+            ruleSetId,
+            decisionTableInputs,
+            decisionTableOutputs,
+            HitPolicy.UNIQUE,
+            Optional.empty());
 
     String dmnModel = DmnModelHandler.transform(metadata, rules);
 
