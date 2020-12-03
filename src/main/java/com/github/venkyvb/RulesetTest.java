@@ -87,7 +87,7 @@ public class RulesetTest {
 
     System.out.println(dmnModel);
 
-    System.out.println(
+    List<Map<String, Object>> result =
         DmnModelHandler.evaluateRules(
                 ruleSetId,
                 dmnModel,
@@ -96,9 +96,10 @@ public class RulesetTest {
                     .putValue("dim_family", "LITS")
                     .putValue("dim_term", 12)
                     .putValue("dim_validity", "2020-10-01T00:00:00"))
-            .toString());
+            .getResultList();
+    DmnModelHandler.printResult("PositiveTestNprLitsf12_RuleFound", result);
 
-    System.out.println(
+    result =
         DmnModelHandler.evaluateRules(
                 ruleSetId,
                 dmnModel,
@@ -107,9 +108,11 @@ public class RulesetTest {
                     .putValue("dim_family", "LILS")
                     .putValue("dim_term", 12)
                     .putValue("dim_validity", "2020-09-30T00:00:00"))
-            .toString());
+            .getResultList();
 
-    System.out.println(
+    DmnModelHandler.printResult("PositiveTestNprfLils12_RuleFound", result);
+
+    result =
         DmnModelHandler.evaluateRules(
                 ruleSetId,
                 dmnModel,
@@ -118,9 +121,11 @@ public class RulesetTest {
                     .putValue("dim_family", "LISS")
                     .putValue("dim_term", 12)
                     .putValue("dim_validity", "2020-10-01T00:00:00"))
-            .toString());
+            .getResultList();
 
-    System.out.println(
+    DmnModelHandler.printResult("PositiveTestNprfLiss12_RuleFound", result);
+
+    result =
         DmnModelHandler.evaluateRules(
                 ruleSetId,
                 dmnModel,
@@ -129,9 +134,11 @@ public class RulesetTest {
                     .putValue("dim_family", "LISS")
                     .putValue("dim_term", 12)
                     .putValue("dim_validity", "2020-10-01T00:00:00"))
-            .toString());
+            .getResultList();
 
-    System.out.println(
+    DmnModelHandler.printResult("PositiveTestLissLiss12_RuleFound", result);
+
+    result =
         DmnModelHandler.evaluateRules(
                 ruleSetId,
                 dmnModel,
@@ -140,9 +147,11 @@ public class RulesetTest {
                     .putValue("dim_family", "ABC")
                     .putValue("dim_term", 12)
                     .putValue("dim_validity", "2020-10-01T00:00:00"))
-            .toString());
+            .getResultList();
 
-    System.out.println(
+    DmnModelHandler.printResult("PositiveTestLissAbc12_RuleNotFound", result);
+
+    result =
         DmnModelHandler.evaluateRules(
                 ruleSetId,
                 dmnModel,
@@ -151,9 +160,11 @@ public class RulesetTest {
                     .putValue("dim_family", "LISS")
                     .putValue("dim_term", 26)
                     .putValue("dim_validity", "2020-10-01T00:00:00"))
-            .toString());
+            .getResultList();
 
-    System.out.println(
+    DmnModelHandler.printResult("PositiveTestLissLiss26_RuleFound", result);
+
+    result =
         DmnModelHandler.evaluateRules(
                 ruleSetId,
                 dmnModel,
@@ -162,9 +173,11 @@ public class RulesetTest {
                     .putValue("dim_family", "LISS")
                     .putValue("dim_term", 36)
                     .putValue("dim_validity", "2020-10-01T00:00:00"))
-            .toString());
+            .getResultList();
 
-    System.out.println(
+    DmnModelHandler.printResult("PositiveTestLissLiss36_RuleFound", result);
+
+    result =
         DmnModelHandler.evaluateRules(
                 ruleSetId,
                 dmnModel,
@@ -173,6 +186,8 @@ public class RulesetTest {
                     .putValue("dim_family", "LISS")
                     .putValue("dim_term", 36)
                     .putValue("dim_validity", "2020-10-01T00:00:00"))
-            .toString());
+            .getResultList();
+
+    DmnModelHandler.printResult("PositiveTestAbcLiss36_RuleFound", result);
   }
 }

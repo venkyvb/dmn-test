@@ -151,4 +151,12 @@ public class DmnModelHandler {
     // From date inclusive, to date exclusive
     return "[date and time(\"" + fromDate + "\")..date and time(\"" + toDate + "\"))";
   }
+
+  // For testing only
+  public static void printResult(String testName, List<Map<String, Object>> result) {
+    System.out.println(testName);
+    for (Map<String, Object> entry : result) {
+      System.out.println(entry);
+    }
+  }
 }

@@ -19,7 +19,7 @@ import org.camunda.bpm.model.dmn.instance.Output;
 import org.camunda.bpm.model.dmn.instance.OutputEntry;
 import org.camunda.bpm.model.dmn.instance.Rule;
 import org.camunda.bpm.model.dmn.instance.Text;
-// Brute-force sample code :)
+// Just initial brute-force sample code :)
 
 public class TestHandler {
 

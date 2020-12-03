@@ -20,9 +20,7 @@ public class BundleTest {
                 Variables.createVariables().putValue("dim_type", Arrays.asList("RC", "LL")))
             .getResultList();
 
-    for (Map<String, Object> entry : result) {
-      System.out.println(entry);
-    }
+    DmnModelHandler.printResult("sampleBundleTest", result);
   }
 
   public static String setupRuleSetOption1(String ruleSetId) {
@@ -82,7 +80,7 @@ public class BundleTest {
                     .putValue("dim_otype", "NB"))
             .getResultList();
 
-    printResult("PositiveTest", result);
+    DmnModelHandler.printResult("PositiveTest", result);
 
     result =
         DmnModelHandler.evaluateRules(
@@ -100,7 +98,7 @@ public class BundleTest {
                     .putValue("dim_otype", "NB"))
             .getResultList();
 
-    printResult("NegativeTest", result);
+    DmnModelHandler.printResult("NegativeTest", result);
 
     result =
         DmnModelHandler.evaluateRules(
@@ -118,7 +116,7 @@ public class BundleTest {
                     .putValue("dim_otype", "NB"))
             .getResultList();
 
-    printResult("PositiveTest", result);
+    DmnModelHandler.printResult("PositiveTest", result);
 
     result =
         DmnModelHandler.evaluateRules(
@@ -136,14 +134,7 @@ public class BundleTest {
                     .putValue("dim_otype", "NB"))
             .getResultList();
 
-    printResult("PositiveTest", result);
-  }
-
-  private static void printResult(String testName, List<Map<String, Object>> result) {
-    System.out.println(testName);
-    for (Map<String, Object> entry : result) {
-      System.out.println(entry);
-    }
+    DmnModelHandler.printResult("PositiveTest", result);
   }
 
   public static String setupRuleSetOption2(String ruleSetId) {
