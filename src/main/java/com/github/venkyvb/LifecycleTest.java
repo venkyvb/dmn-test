@@ -22,6 +22,7 @@ public class LifecycleTest {
     List<DecisionTableOutput> decisionTableOutputs = new LinkedList<>();
     decisionTableOutputs.add(new DecisionTableOutput("Discount", "discount", "double"));
 
+    // Create and execute an initial set of Rules for a given RuleSet
     List<RuleEntry> rules = new LinkedList<>();
 
     List<String> inputValuesLnprf1 = new LinkedList<>();
@@ -58,7 +59,8 @@ public class LifecycleTest {
             .getResultList();
     DmnModelHandler.printResult("PositiveLifecycleTest1", result);
 
-    // Update the rules
+    // Update the rules for the rule set by splitting the validity of an existing rule
+    // Run evaluation for the updated ruleset
     List<RuleEntry> rulesUpdated = new LinkedList<>();
 
     List<String> inputValuesLnprfU1 = new LinkedList<>();
