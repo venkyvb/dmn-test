@@ -80,7 +80,7 @@ public class BundleTest {
                     .putValue("dim_otype", "NB"))
             .getResultList();
 
-    DmnModelHandler.printResult("PositiveTest", result);
+    DmnModelHandler.printResult("PositiveTest1_RuleFound", result);
 
     result =
         DmnModelHandler.evaluateRules(
@@ -98,7 +98,61 @@ public class BundleTest {
                     .putValue("dim_otype", "NB"))
             .getResultList();
 
-    DmnModelHandler.printResult("NegativeTest", result);
+    DmnModelHandler.printResult("NegativeTest1_RuleNotFound", result);
+
+    result =
+        DmnModelHandler.evaluateRules(
+                ruleSetId,
+                dmnModel,
+                Variables.createVariables()
+                    .putValue("dim_rr", "AP")
+                    .putValue("dim_ts1", "RC")
+                    .putValue("dim_ts1_vol", 1)
+                    .putValue("dim_ts2", "JS")
+                    .putValue("dim_ts2_vol", 7)
+                    .putValue("dim_ls1", "LL")
+                    .putValue("dim_ls1_vol", 10)
+                    .putValue("dim_level", "TA1")
+                    .putValue("dim_otype", "NB"))
+            .getResultList();
+
+    DmnModelHandler.printResult("NegativeTest2_RuleNotFound", result);
+
+    result =
+        DmnModelHandler.evaluateRules(
+                ruleSetId,
+                dmnModel,
+                Variables.createVariables()
+                    .putValue("dim_rr", "AP")
+                    .putValue("dim_ts1", "RC")
+                    .putValue("dim_ts1_vol", 1)
+                    .putValue("dim_ts2", "JS")
+                    .putValue("dim_ts2_vol", 7)
+                    .putValue("dim_ls1", "LL")
+                    .putValue("dim_ls1_vol", 10)
+                    .putValue("dim_level", "TA2")
+                    .putValue("dim_otype", "NB"))
+            .getResultList();
+
+    DmnModelHandler.printResult("NegativeTest3_RuleNotFound", result);
+
+    result =
+        DmnModelHandler.evaluateRules(
+                ruleSetId,
+                dmnModel,
+                Variables.createVariables()
+                    .putValue("dim_rr", "AP")
+                    .putValue("dim_ts1", "RC")
+                    .putValue("dim_ts1_vol", 1)
+                    .putValue("dim_ts2", "JS")
+                    .putValue("dim_ts2_vol", 7)
+                    .putValue("dim_ls1", "LL")
+                    .putValue("dim_ls1_vol", 50)
+                    .putValue("dim_level", "TA2")
+                    .putValue("dim_otype", "NB"))
+            .getResultList();
+
+    DmnModelHandler.printResult("PositiveTest2_RuleFound", result);
 
     result =
         DmnModelHandler.evaluateRules(
@@ -116,7 +170,7 @@ public class BundleTest {
                     .putValue("dim_otype", "NB"))
             .getResultList();
 
-    DmnModelHandler.printResult("PositiveTest", result);
+    DmnModelHandler.printResult("PositiveTest3_RuleFound", result);
 
     result =
         DmnModelHandler.evaluateRules(
@@ -134,7 +188,7 @@ public class BundleTest {
                     .putValue("dim_otype", "NB"))
             .getResultList();
 
-    DmnModelHandler.printResult("PositiveTest", result);
+    DmnModelHandler.printResult("PositiveTest4_RuleFound", result);
   }
 
   public static String setupRuleSetOption2(String ruleSetId) {
@@ -179,6 +233,30 @@ public class BundleTest {
     inputValues2.add(">=10");
     inputValues2.add("\"PIL\",\"NB\"");
     rules.add(new RuleEntry(inputValues2, "\"Bundle1\""));
+
+    List<String> inputValues3 = new LinkedList<>();
+    inputValues3.add("\"AP\"");
+    inputValues3.add("\"RC\"");
+    inputValues3.add(">1");
+    inputValues3.add("");
+    inputValues3.add("");
+    inputValues3.add("\"LL\",\"LLP\"");
+    inputValues3.add("\"TA1\",\"TA2\"");
+    inputValues3.add(">=50");
+    inputValues3.add("\"PIL\",\"NB\"");
+    rules.add(new RuleEntry(inputValues3, "\"Bundle1\""));
+
+    List<String> inputValues4 = new LinkedList<>();
+    inputValues4.add("\"AP\"");
+    inputValues4.add("");
+    inputValues4.add("");
+    inputValues4.add("\"JS\"");
+    inputValues4.add(">6");
+    inputValues4.add("\"LL\",\"LLP\"");
+    inputValues4.add("\"TA1\",\"TA2\"");
+    inputValues4.add(">=50");
+    inputValues4.add("\"PIL\",\"NB\"");
+    rules.add(new RuleEntry(inputValues4, "\"Bundle1\""));
 
     DecisionTableMetadata metadata =
         new DecisionTableMetadata(

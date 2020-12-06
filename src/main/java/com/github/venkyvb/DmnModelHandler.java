@@ -52,9 +52,6 @@ public class DmnModelHandler {
   public static DmnDecisionTableResult evaluateRules(
       String ruleSetId, String dmnModel, VariableMap variableMap) {
 
-    DmnModelInstance modelInstance =
-        Dmn.readModelFromStream(new ByteArrayInputStream(dmnModel.getBytes()));
-
     DmnEngineConfiguration configuration =
         DmnEngineConfiguration.createDefaultDmnEngineConfiguration();
 
@@ -63,6 +60,34 @@ public class DmnModelHandler {
     configuration.getCustomPostDecisionTableEvaluationListeners().add(listener);
 
     DmnEngine dmnEngine = configuration.buildEngine();
+
+    DmnModelInstance modelInstance =
+        Dmn.readModelFromStream(new ByteArrayInputStream(dmnModel.getBytes()));
+
+    DmnDecision decision = dmnEngine.parseDecision(getDecisionId(ruleSetId), modelInstance);
+
+    DmnDecisionTableResult result = dmnEngine.evaluateDecisionTable(decision, variableMap);
+
+    return result;
+  }
+
+  public static DmnEngine getDmnEngine() {
+
+    DmnEngineConfiguration configuration =
+        DmnEngineConfiguration.createDefaultDmnEngineConfiguration();
+
+    DmnDecisionTableEvaluationListener listener = new DecisionTableEvaluationListener();
+
+    configuration.getCustomPostDecisionTableEvaluationListeners().add(listener);
+
+    return configuration.buildEngine();
+  }
+
+  public static DmnDecisionTableResult evaluateRulesWithEngineInstance(
+      String ruleSetId, String dmnModel, VariableMap variableMap, DmnEngine dmnEngine) {
+
+    DmnModelInstance modelInstance =
+        Dmn.readModelFromStream(new ByteArrayInputStream(dmnModel.getBytes()));
 
     DmnDecision decision = dmnEngine.parseDecision(getDecisionId(ruleSetId), modelInstance);
 
