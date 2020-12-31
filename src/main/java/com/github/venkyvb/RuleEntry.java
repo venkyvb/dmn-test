@@ -5,18 +5,18 @@ import java.util.*;
 public class RuleEntry {
   private List<String> inputEntries;
   // For now just a single result value
-  private String outputEntry;
+  private List<String> outputEntries;
 
-  public RuleEntry(List<String> inputEntries, String outputEntry) {
+  public RuleEntry(List<String> inputEntries, List<String> outputEntries) {
     this.inputEntries = inputEntries;
-    this.outputEntry = outputEntry;
+    this.outputEntries = outputEntries;
   }
 
   public List<String> getInputEntries() {
     return this.inputEntries;
   }
 
-  public String getOutputEntry() {
-    return this.outputEntry;
+  public List<String> getOutputEntries() {
+    return this.outputEntries;
   }
 }

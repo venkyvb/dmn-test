@@ -33,17 +33,17 @@ public class BundleTest {
     List<RuleEntry> rules = new LinkedList<>();
     List<String> inputValuesB1 = new LinkedList<>();
     inputValuesB1.add("contains(cellInput, \"RC\")");
-    rules.add(new RuleEntry(inputValuesB1, "\"RC\""));
+    rules.add(new RuleEntry(inputValuesB1, Arrays.asList("\"RC\"")));
 
     List<String> inputValuesB2 = new LinkedList<>();
     inputValuesB2.add("contains(cellInput, \"JS\")");
-    rules.add(new RuleEntry(inputValuesB2, "\"JS\""));
+    rules.add(new RuleEntry(inputValuesB2, Arrays.asList("\"JS\"")));
 
     List<String> inputValuesB3 = new LinkedList<>();
     inputValuesB3.add(
         "(contains(cellInput, \"RC\") or contains(cellInput, \"JS\")) and"
             + " (contains(cellInput, \"LL\") or contains(cellInput, \"LLP\"))");
-    rules.add(new RuleEntry(inputValuesB3, "\"RC OR JS AND LL OR LLP\""));
+    rules.add(new RuleEntry(inputValuesB3, Arrays.asList("\"RC OR JS AND LL OR LLP\"")));
 
     DecisionTableMetadata metadata =
         new DecisionTableMetadata(
@@ -220,7 +220,7 @@ public class BundleTest {
     inputValues1.add("\"TA0\"");
     inputValues1.add(">=10");
     inputValues1.add("\"PIL\",\"NB\"");
-    rules.add(new RuleEntry(inputValues1, "\"Bundle1\""));
+    rules.add(new RuleEntry(inputValues1, Arrays.asList("\"Bundle1\"")));
 
     List<String> inputValues2 = new LinkedList<>();
     inputValues2.add("\"AP\"");
@@ -232,7 +232,7 @@ public class BundleTest {
     inputValues2.add("\"TA0\"");
     inputValues2.add(">=10");
     inputValues2.add("\"PIL\",\"NB\"");
-    rules.add(new RuleEntry(inputValues2, "\"Bundle1\""));
+    rules.add(new RuleEntry(inputValues2, Arrays.asList("\"Bundle1\"")));
 
     List<String> inputValues3 = new LinkedList<>();
     inputValues3.add("\"AP\"");
@@ -244,7 +244,7 @@ public class BundleTest {
     inputValues3.add("\"TA1\",\"TA2\"");
     inputValues3.add(">=50");
     inputValues3.add("\"PIL\",\"NB\"");
-    rules.add(new RuleEntry(inputValues3, "\"Bundle1\""));
+    rules.add(new RuleEntry(inputValues3, Arrays.asList("\"Bundle1\"")));
 
     List<String> inputValues4 = new LinkedList<>();
     inputValues4.add("\"AP\"");
@@ -256,7 +256,7 @@ public class BundleTest {
     inputValues4.add("\"TA1\",\"TA2\"");
     inputValues4.add(">=50");
     inputValues4.add("\"PIL\",\"NB\"");
-    rules.add(new RuleEntry(inputValues4, "\"Bundle1\""));
+    rules.add(new RuleEntry(inputValues4, Arrays.asList("\"Bundle1\"")));
 
     DecisionTableMetadata metadata =
         new DecisionTableMetadata(

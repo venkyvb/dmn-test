@@ -32,7 +32,7 @@ public class LifecycleTest {
     inputValuesLnprf1.add(
         DmnModelHandler.getValidityDateInputEntry(
             LocalDateTime.of(2020, 1, 1, 00, 00, 00), LocalDateTime.of(2021, 12, 31, 00, 00, 00)));
-    rules.add(new RuleEntry(inputValuesLnprf1, "40"));
+    rules.add(new RuleEntry(inputValuesLnprf1, Arrays.asList("40")));
 
     String ruleSetId = "lifeCycleTest1";
 
@@ -70,7 +70,7 @@ public class LifecycleTest {
     inputValuesLnprfU1.add(
         DmnModelHandler.getValidityDateInputEntry(
             LocalDateTime.of(2020, 1, 1, 00, 00, 00), LocalDateTime.of(2020, 10, 1, 00, 00, 00)));
-    rulesUpdated.add(new RuleEntry(inputValuesLnprfU1, "40"));
+    rulesUpdated.add(new RuleEntry(inputValuesLnprfU1, Arrays.asList("40")));
 
     List<String> inputValuesLnprfU2 = new LinkedList<>();
     inputValuesLnprfU2.add("\"LNPRF\"");
@@ -79,7 +79,7 @@ public class LifecycleTest {
     inputValuesLnprfU2.add(
         DmnModelHandler.getValidityDateInputEntry(
             LocalDateTime.of(2020, 10, 1, 00, 00, 00), LocalDateTime.of(2021, 12, 31, 00, 00, 00)));
-    rulesUpdated.add(new RuleEntry(inputValuesLnprfU2, "50"));
+    rulesUpdated.add(new RuleEntry(inputValuesLnprfU2, Arrays.asList("50")));
 
     metadata =
         new DecisionTableMetadata(

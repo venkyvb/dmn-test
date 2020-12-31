@@ -19,6 +19,7 @@ public class RulesetTest {
 
     List<DecisionTableOutput> decisionTableOutputs = new LinkedList<>();
     decisionTableOutputs.add(new DecisionTableOutput("Discount", "discount", "double"));
+    decisionTableOutputs.add(new DecisionTableOutput("Description", "description", "string"));
 
     List<RuleEntry> rules = new LinkedList<>();
 
@@ -29,7 +30,7 @@ public class RulesetTest {
     inputValuesLnprf1.add(
         DmnModelHandler.getValidityDateInputEntry(
             LocalDateTime.of(2020, 10, 1, 00, 00, 00), LocalDateTime.of(2021, 6, 30, 00, 00, 00)));
-    rules.add(new RuleEntry(inputValuesLnprf1, "50"));
+    rules.add(new RuleEntry(inputValuesLnprf1, Arrays.asList("50", "\"fifty_percent\"")));
 
     List<String> inputValuesLnprf2 = new LinkedList<>();
     inputValuesLnprf2.add("\"LNPRF\"");
@@ -38,7 +39,7 @@ public class RulesetTest {
     inputValuesLnprf2.add(
         DmnModelHandler.getValidityDateInputEntry(
             LocalDateTime.of(2020, 1, 1, 00, 00, 00), LocalDateTime.of(2020, 10, 1, 00, 00, 00)));
-    rules.add(new RuleEntry(inputValuesLnprf2, "40"));
+    rules.add(new RuleEntry(inputValuesLnprf2, Arrays.asList("40", "\"forty_percent\"")));
 
     List<String> inputValuesLiss1 = new LinkedList<>();
     inputValuesLiss1.add("");
@@ -47,7 +48,7 @@ public class RulesetTest {
     inputValuesLiss1.add(
         DmnModelHandler.getValidityDateInputEntry(
             LocalDateTime.of(2020, 10, 1, 00, 00, 00), LocalDateTime.of(2021, 6, 30, 00, 00, 00)));
-    rules.add(new RuleEntry(inputValuesLiss1, "7.5"));
+    rules.add(new RuleEntry(inputValuesLiss1, Arrays.asList("7.5", "\"seven_and_half_percent\"")));
 
     List<String> inputValuesLiss2 = new LinkedList<>();
     inputValuesLiss2.add("");
@@ -56,7 +57,7 @@ public class RulesetTest {
     inputValuesLiss2.add(
         DmnModelHandler.getValidityDateInputEntry(
             LocalDateTime.of(2020, 10, 1, 00, 00, 00), LocalDateTime.of(2021, 6, 30, 00, 00, 00)));
-    rules.add(new RuleEntry(inputValuesLiss2, "5"));
+    rules.add(new RuleEntry(inputValuesLiss2, Arrays.asList("5", "\"five_percent\"")));
 
     List<String> inputValuesLiss3 = new LinkedList<>();
     inputValuesLiss3.add("");
@@ -65,7 +66,7 @@ public class RulesetTest {
     inputValuesLiss3.add(
         DmnModelHandler.getValidityDateInputEntry(
             LocalDateTime.of(2020, 10, 1, 00, 00, 00), LocalDateTime.of(2021, 6, 30, 00, 00, 00)));
-    rules.add(new RuleEntry(inputValuesLiss3, "3"));
+    rules.add(new RuleEntry(inputValuesLiss3, Arrays.asList("3", "\"three_percent\"")));
 
     DecisionTableMetadata metadata =
         new DecisionTableMetadata(

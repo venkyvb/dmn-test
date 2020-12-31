@@ -159,11 +159,13 @@ public class DmnModelHandler {
       rule.addChildElement(inputEntry);
     }
 
-    OutputEntry outputEntry = modelInstance.newInstance(OutputEntry.class);
-    Text text = modelInstance.newInstance(Text.class);
-    text.setTextContent(ruleEntry.getOutputEntry());
-    outputEntry.addChildElement(text);
-    rule.addChildElement(outputEntry);
+    for (String entry : ruleEntry.getOutputEntries()) {
+      Text text = modelInstance.newInstance(Text.class);
+      text.setTextContent(entry);
+      OutputEntry outputEntry = modelInstance.newInstance(OutputEntry.class);
+      outputEntry.addChildElement(text);
+      rule.addChildElement(outputEntry);
+    }
 
     return rule;
   }

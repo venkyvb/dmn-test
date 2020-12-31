@@ -6,8 +6,8 @@ public final class App {
   private App() {}
 
   public static void main(String[] args) throws ParseException {
-    // RulesetTest.testRuleSet1();
-    BundleTest.executeTestOption2();
+    RulesetTest.testRuleSet1();
+    // BundleTest.executeTestOption2();
     // LifecycleTest.execute();
   }
 }
